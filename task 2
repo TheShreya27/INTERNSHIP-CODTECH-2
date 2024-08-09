@@ -1,0 +1,68 @@
+
+def calculate_gpa(average):
+    """Calculate GPA based on average grade."""
+    if average >= 90:
+        return 4.0
+    elif average >= 80:
+        return 3.0
+    elif average >= 70:
+        return 2.0
+    elif average >= 60:
+        return 1.0
+    else:
+        return 0.0
+
+def get_letter_grade(average):
+    """Determine letter grade based on average grade."""
+    if average >= 90:
+        return 'A'
+    elif average >= 80:
+        return 'B'
+    elif average >= 70:
+        return 'C'
+    elif average >= 60:
+        return 'D'
+    else:
+        return 'F'
+
+def main():
+    print("Welcome to the Student Grade Tracker!")
+
+    grades = []
+    subjects = []
+
+    while True:
+        subject = input("Enter the subject or assignment name (or type 'done' to finish): ")
+        if subject.lower() == 'done':
+            break
+
+        try:
+            grade = float(input(f"Enter the grade for {subject}: "))
+            if grade < 0 or grade > 100:
+                print("Please enter a grade between 0 and 100.")
+                continue
+            subjects.append(subject)
+            grades.append(grade)
+        except ValueError:
+            print("Invalid input. Please enter a numerical value for the grade.")
+
+    if not grades:
+        print("No grades were entered.")
+        return
+
+    # Calculate average, GPA, and letter grade
+    average = sum(grades) / len(grades)
+    gpa = calculate_gpa(average)
+    letter_grade = get_letter_grade(average)
+
+    # Display results
+    print("\nGrade Summary:")
+    for subject, grade in zip(subjects, grades):
+        print(f"{subject}: {grade:.2f}")
+
+    print(f"\nAverage Grade: {average:.2f}")
+    print(f"Letter Grade: {letter_grade}")
+    print(f"GPA: {gpa:.2f}")
+
+if __name__ == "__main__":
+    main()
